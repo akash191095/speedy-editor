@@ -17,8 +17,8 @@ export default function Index() {
   };
 
   return (
-    <main>
-      <Button variant="solid" color="default" onClick={toggleTheme}>
+    <main className="max-w-7xl mx-auto">
+      <Button variant="solid" color="primary" onClick={toggleTheme}>
         Toggle
       </Button>
     </main>
