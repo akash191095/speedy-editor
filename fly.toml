@@ -1,4 +1,4 @@
-app = "speedy-editor-a8a2"
+app = "speedy-editor"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
