@@ -6,7 +6,7 @@ import DemoImg from "~/assets/demo.png";
 import ImageEditor from "~/components/ImageEditor/ImageEditor";
 import { useOptionalUser } from "~/utils/utils";
 
-export const meta: MetaFunction = () => [{ title: "Remix Notes" }];
+export const meta: MetaFunction = () => [{ title: "Speedy Editor" }];
 
 export default function Index() {
   const user = useOptionalUser();
