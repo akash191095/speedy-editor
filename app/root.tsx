@@ -14,6 +14,7 @@ import {
 
 import stylesheet from "~/tailwind.css";
 
+import Nav from "./components/Nav";
 import { getUser } from "./session.server";
 import {
   NonFlashOfWrongThemeEls,
@@ -61,6 +62,7 @@ function App() {
       </head>
       <body className="h-full">
         <NextUIProvider className="h-full">
+          <Nav />
           <Outlet />
           <ScrollRestoration />
           <Scripts />

@@ -4,9 +4,8 @@ import {
   NavbarContent,
   NavbarItem,
   Button,
-  Link,
 } from "@nextui-org/react";
-import { useFetcher } from "@remix-run/react";
+import { Link, useFetcher } from "@remix-run/react";
 import { PiSunBold, PiMoonStars } from "react-icons/pi";
 
 import { Theme, useTheme } from "~/utils/theme-provider";
@@ -24,14 +23,18 @@ export default function Nav() {
   };
 
   return (
-    <Navbar>
+    <Navbar maxWidth="full">
       <NavbarBrand>
-        <p className="font-bold text-inherit">SPEEDY EDITOR</p>
+        <Link to="/">
+          <p className="font-bold text-inherit">SPEEDY EDITOR</p>
+        </Link>
       </NavbarBrand>
       {user ? (
         <NavbarContent justify="end">
-          <NavbarItem className="hidden lg:flex">
+          <NavbarItem>
             <Button
+              color="danger"
+              variant="flat"
               onClick={() => {
                 fetcher.submit(null, { action: "/logout", method: "post" });
               }}
@@ -42,11 +45,11 @@ export default function Nav() {
         </NavbarContent>
       ) : (
         <NavbarContent justify="end">
-          <NavbarItem className="hidden lg:flex">
-            <Link href="/login">Login</Link>
+          <NavbarItem>
+            <Link to="/login">Login</Link>
           </NavbarItem>
           <NavbarItem>
-            <Button as={Link} color="primary" href="/join" variant="flat">
+            <Button as={Link} color="primary" to="/join" variant="flat">
               Sign Up
             </Button>
           </NavbarItem>

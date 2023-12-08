@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tui-image-editor-container .tui-image-editor-header-logo {
+  display: none;
+}

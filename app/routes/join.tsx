@@ -79,6 +79,10 @@ export default function Join() {
   const passwordRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    emailRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
     if (actionData?.errors?.email) {
       emailRef.current?.focus();
     } else if (actionData?.errors?.password) {

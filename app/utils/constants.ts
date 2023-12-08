@@ -1,0 +1,6 @@
+export const IMAGE_EDITOR_PRESETS = {
+  NONE: "NONE",
+  ADD_TIME_STAMP: "ADD_TIME_STAMP",
+  FLIP_Y: "FLIP_Y",
+  FLIP_X: "FLIP_X",
+};
