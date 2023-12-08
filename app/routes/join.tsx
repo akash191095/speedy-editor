@@ -87,11 +87,11 @@ export default function Join() {
   }, [actionData]);
 
   return (
-    <div className="flex min-h-full justify-center items-center">
+    <main className="flex min-h-full justify-center items-center">
       <div className="hidden min-h-screen basis-2/5 md:flex lg:basis-3/5">
         <img src={BG} alt="background" className="object-cover" />
       </div>
-      <Card className="max-w-[700px] mx-auto py-14 px-6">
+      <Card className="max-w-[700px] w-96 mx-auto py-14 px-6">
         <CardHeader className="flex justify-center mb-4">
           <p className="text-2xl font-bold">Create your account now</p>
         </CardHeader>
@@ -146,6 +146,6 @@ export default function Join() {
           </Form>
         </CardBody>
       </Card>
-    </div>
+    </main>
   );
 }

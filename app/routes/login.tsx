@@ -1,3 +1,11 @@
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Button,
+  Input,
+  Checkbox,
+} from "@nextui-org/react";
 import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -7,6 +15,7 @@ import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
+import BG from "~/assets/bg2.jpg";
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils/utils";
@@ -66,7 +75,7 @@ export const meta: MetaFunction = () => [{ title: "Login" }];
 
 export default function LoginPage() {
   const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/notes";
+  const redirectTo = searchParams.get("redirectTo") || "/";
   const actionData = useActionData<typeof action>();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -80,101 +89,68 @@ export default function LoginPage() {
   }, [actionData]);
 
   return (
-    <div className="flex min-h-full flex-col justify-center">
-      <div className="mx-auto w-full max-w-md px-8">
-        <Form method="post" className="space-y-6">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email address
-            </label>
-            <div className="mt-1">
-              <input
-                ref={emailRef}
-                id="email"
-                required
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus={true}
-                name="email"
+    <main className="flex min-h-full justify-center items-center">
+      <div className="hidden h-screen basis-2/5 md:flex lg:basis-3/5">
+        <img src={BG} alt="background" className="object-cover w-full" />
+      </div>
+      <Card className="max-w-[700px] w-96 mx-auto py-14 px-6">
+        <CardHeader className="flex justify-center mb-4">
+          <p className="text-2xl font-bold">Welcome Back!</p>
+        </CardHeader>
+        <CardBody>
+          <Form method="post" className="space-y-6">
+            <div className="mb-8">
+              <Input
+                label="Email address"
                 type="email"
+                isRequired
                 autoComplete="email"
                 aria-invalid={actionData?.errors?.email ? true : undefined}
                 aria-describedby="email-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                ref={emailRef}
+                errorMessage={actionData?.errors?.email}
+                isInvalid={!!actionData?.errors?.email}
+                name="email"
               />
-              {actionData?.errors?.email ? (
-                <div className="pt-1 text-red-700" id="email-error">
-                  {actionData.errors.email}
-                </div>
-              ) : null}
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <div className="mt-1">
-              <input
-                id="password"
-                ref={passwordRef}
-                name="password"
+              <Input
+                label="Password"
                 type="password"
-                autoComplete="current-password"
+                isRequired
                 aria-invalid={actionData?.errors?.password ? true : undefined}
                 aria-describedby="password-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                errorMessage={actionData?.errors?.password}
+                isInvalid={!!actionData?.errors?.password}
+                name="password"
+                ref={passwordRef}
+                className="mt-6"
               />
-              {actionData?.errors?.password ? (
-                <div className="pt-1 text-red-700" id="password-error">
-                  {actionData.errors.password}
-                </div>
-              ) : null}
+              <Checkbox name="remember" defaultSelected className="mt-6">
+                Remember
+              </Checkbox>
+              <input type="hidden" name="redirectTo" value={redirectTo} />
             </div>
-          </div>
 
-          <input type="hidden" name="redirectTo" value={redirectTo} />
-          <button
-            type="submit"
-            className="w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
-          >
-            Log in
-          </button>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember"
-                name="remember"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-              />
-              <label
-                htmlFor="remember"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
+            <Button type="submit" color="secondary">
+              Login
+            </Button>
+
+            <div className="flex items-center justify-between">
+              <div className="text-center text-sm">
+                Don&apos;t have an account?{" "}
+                <Link
+                  className="text-secondary underline"
+                  to={{
+                    pathname: "/join",
+                    search: searchParams.toString(),
+                  }}
+                >
+                  Sign up
+                </Link>
+              </div>
             </div>
-            <div className="text-center text-sm text-gray-500">
-              Don&apos;t have an account?{" "}
-              <Link
-                className="text-blue-500 underline"
-                to={{
-                  pathname: "/join",
-                  search: searchParams.toString(),
-                }}
-              >
-                Sign up
-              </Link>
-            </div>
-          </div>
-        </Form>
-      </div>
-    </div>
+          </Form>
+        </CardBody>
+      </Card>
+    </main>
   );
 }
