@@ -56,7 +56,7 @@ function App() {
         <NonFlashOfWrongThemeEls ssrTheme={Boolean(data.theme)} />
       </head>
       <body className="h-full">
-        <NextUIProvider>
+        <NextUIProvider className="h-full">
           <Outlet />
           <ScrollRestoration />
           <Scripts />
