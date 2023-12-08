@@ -1,4 +1,5 @@
 import { NextUIProvider } from "@nextui-org/react";
+import { User } from "@prisma/client";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import {
@@ -13,6 +14,7 @@ import {
 
 import stylesheet from "~/tailwind.css";
 
+import { getUser } from "./session.server";
 import {
   NonFlashOfWrongThemeEls,
   Theme,
@@ -28,6 +30,7 @@ export const links: LinksFunction = () => [
 
 export interface LoaderData {
   theme: Theme | null;
+  user: User | null;
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -35,6 +38,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const data: LoaderData = {
     theme: themeSession.getTheme(),
+    user: await getUser(request),
   };
 
   return data;
