@@ -137,7 +137,7 @@ export default function ImageEditor() {
   return (
     <div className="relative">
       {ReactImageEditor}
-      <div className="dark absolute w-80 bottom-3 right-3 z-10 flex justify-end gap-3">
+      <div className="dark w-full mt-5 bottom-3 right-3 z-10 flex justify-center gap-3">
         <Dropdown>
           <DropdownTrigger>
             <Button variant="bordered">Add Preset</Button>
