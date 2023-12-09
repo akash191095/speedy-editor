@@ -5,3 +5,7 @@
 .tui-image-editor-container .tui-image-editor-header-logo {
   display: none;
 }
+
+.tui-image-editor-header-buttons {
+  display: none;
+}

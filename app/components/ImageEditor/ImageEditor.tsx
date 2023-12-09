@@ -5,7 +5,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
-import { Key, useEffect, useRef, useState } from "react";
+import { ChangeEvent, Key, useEffect, useRef, useState } from "react";
 
 import "tui-image-editor/dist/tui-image-editor.css";
 import { IMAGE_EDITOR_PRESETS } from "~/utils/constants";
@@ -27,6 +27,8 @@ export default function ImageEditor() {
   const ImageEditorRef = useRef<{ imageEditorInst: any }>({
     imageEditorInst: null,
   });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ImageUplaodRef = useRef<any>({});
 
   const [theme] = useTheme();
 
@@ -101,10 +103,41 @@ export default function ImageEditor() {
     }
   }
 
+  function loadImage(event: ChangeEvent<HTMLInputElement>) {
+    if (!ImageEditorRef.current.imageEditorInst) {
+      return;
+    }
+    const file = event?.target?.files?.length ? event.target.files[0] : null;
+    if (file) {
+      ImageEditorRef.current.imageEditorInst.loadImageFromFile(file);
+    }
+  }
+
+  function handleDownload() {
+    if (!ImageEditorRef.current.imageEditorInst) {
+      return;
+    }
+    const base64 = ImageEditorRef.current.imageEditorInst.toDataURL({
+      format: "png",
+    });
+    fetch(base64).then(async (res) => {
+      const blob = await res.blob();
+      const uriContent = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", uriContent);
+      link.setAttribute(
+        "download",
+        `${ImageEditorRef.current.imageEditorInst.getImageName()}-${Date.now().toString()}`,
+      );
+      const event = new MouseEvent("click");
+      link.dispatchEvent(event);
+    });
+  }
+
   return (
     <div className="relative">
       {ReactImageEditor}
-      <div className="dark absolute w-80 bottom-3 right-3 z-10 flex justify-end">
+      <div className="dark absolute w-80 bottom-3 right-3 z-10 flex justify-end gap-3">
         <Dropdown>
           <DropdownTrigger>
             <Button variant="bordered">Add Preset</Button>
@@ -115,6 +148,16 @@ export default function ImageEditor() {
             ))}
           </DropdownMenu>
         </Dropdown>
+        <Button onClick={() => ImageUplaodRef.current.click()}>Load</Button>
+        <input
+          onChange={loadImage}
+          ref={ImageUplaodRef}
+          type="file"
+          id="file"
+          name="file"
+          hidden
+        />
+        <Button onClick={handleDownload}>Download</Button>
       </div>
     </div>
   );
