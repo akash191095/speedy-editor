@@ -42,6 +42,15 @@ export default function Nav() {
               Logout
             </Button>
           </NavbarItem>
+          <NavbarItem>
+            <Button variant="light" onClick={toggleTheme}>
+              {theme === Theme.DARK ? (
+                <PiSunBold className="w-5 h-5" />
+              ) : (
+                <PiMoonStars className="w-5 h-5" />
+              )}
+            </Button>
+          </NavbarItem>
         </NavbarContent>
       ) : (
         <NavbarContent justify="end">

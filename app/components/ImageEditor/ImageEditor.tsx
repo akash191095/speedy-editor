@@ -139,7 +139,7 @@ export default function ImageEditor() {
   return (
     <div className="relative w-full flex flex-col min-h-[calc(100vh-64px)]">
       {ReactImageEditor}
-      <div className="dark w-full bottom-3 right-3 z-10 flex justify-center gap-3 my-5">
+      <div className="w-full bottom-3 right-3 z-10 flex justify-center gap-3 my-5">
         <Dropdown>
           <DropdownTrigger>
             <Button variant="bordered">Add Preset</Button>
