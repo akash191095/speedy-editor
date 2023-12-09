@@ -16,6 +16,7 @@ import lightTheme from "./theme/light-theme";
 
 const preset = [
   { label: "Add Timestamp", value: IMAGE_EDITOR_PRESETS.ADD_TIME_STAMP },
+  { label: "Add Border", value: IMAGE_EDITOR_PRESETS.ADD_YELLOW_BORDER },
   { label: "Flip Vertically", value: IMAGE_EDITOR_PRESETS.FLIP_Y },
   { label: "Flip Horizontally", value: IMAGE_EDITOR_PRESETS.FLIP_X },
 ];
@@ -100,6 +101,20 @@ export default function ImageEditor() {
             console.log("error: ", message);
           });
         break;
+      case IMAGE_EDITOR_PRESETS.ADD_YELLOW_BORDER: {
+        const canvasSize =
+          ImageEditorRef.current.imageEditorInst.getCanvasSize();
+        ImageEditorRef.current.imageEditorInst.addShape("rect", {
+          fill: "transparent",
+          stroke: "yellow",
+          strokeWidth: (canvasSize.width / 100) * 5,
+          width: canvasSize.width,
+          height: canvasSize.height,
+          left: canvasSize.width / 2,
+          top: canvasSize.height / 2,
+        });
+        break;
+      }
       default:
         break;
     }

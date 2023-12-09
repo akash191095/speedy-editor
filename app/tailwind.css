@@ -14,6 +14,16 @@
   flex: 1;
 }
 
+.tui-colorpicker-palette-button {
+  width: 10px;
+  height: 10px;
+}
+
+.tui-colorpicker-clearfix {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 body > svg {
   /* Required as an svg is added due to react image editor */
   display: none;
