@@ -2,8 +2,8 @@ import { Button, Card, CardBody, Divider } from "@nextui-org/react";
 import type { MetaFunction } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 
-import DemoDarkImg from "~/assets/demo-dark.png";
-import DemoImg from "~/assets/demo.png";
+import DemoImg from "~/assets/demo-comp.jpg";
+import DemoDarkImg from "~/assets/demo-dark-comp.jpg";
 import ImageEditor from "~/components/ImageEditor/ImageEditor";
 import { Theme, useTheme } from "~/utils/theme-provider";
 import { useOptionalUser } from "~/utils/utils";
