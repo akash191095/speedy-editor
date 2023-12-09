@@ -107,7 +107,6 @@ export default function LoginPage() {
               <Input
                 label="Email address"
                 type="email"
-                isRequired
                 autoComplete="email"
                 aria-invalid={actionData?.errors?.email ? true : undefined}
                 aria-describedby="email-error"
@@ -119,7 +118,6 @@ export default function LoginPage() {
               <Input
                 label="Password"
                 type="password"
-                isRequired
                 aria-invalid={actionData?.errors?.password ? true : undefined}
                 aria-describedby="password-error"
                 errorMessage={actionData?.errors?.password}
