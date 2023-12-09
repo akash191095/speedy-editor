@@ -9,3 +9,12 @@
 .tui-image-editor-header-buttons {
   display: none;
 }
+
+.tui-image-editor-container {
+  flex: 1;
+}
+
+body > svg {
+  /* Required as an svg is added due to react image editor */
+  display: none;
+}

@@ -29,7 +29,6 @@ export default function ImageEditor() {
   });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ImageUplaodRef = useRef<any>({});
-
   const [theme] = useTheme();
 
   useEffect(() => {
@@ -37,8 +36,11 @@ export default function ImageEditor() {
       // @ts-expect-error ignore
       const module = await import("@toast-ui/react-image-editor");
       const ModuleReactImageEditor = module.default.default;
+      const maxHeight = window.innerHeight - 450;
+
       setReactImageEditor(
         <ModuleReactImageEditor
+          className="flex-1"
           ref={ImageEditorRef}
           includeUI={{
             loadImage: {
@@ -50,12 +52,12 @@ export default function ImageEditor() {
             initMenu: "",
             uiSize: {
               width: "100%",
-              height: "700px",
+              height: "100%",
             },
             menuBarPosition: "bottom",
           }}
-          cssMaxHeight={400}
-          cssMaxWidth={1200}
+          cssMaxHeight={maxHeight < 400 ? 400 : maxHeight}
+          cssMaxWidth={window.innerWidth}
           selectionStyle={{
             cornerSize: 20,
             rotatingPointOffset: 70,
@@ -135,9 +137,9 @@ export default function ImageEditor() {
   }
 
   return (
-    <div className="relative">
+    <div className="relative w-full flex flex-col min-h-[calc(100vh-64px)]">
       {ReactImageEditor}
-      <div className="dark w-full mt-5 bottom-3 right-3 z-10 flex justify-center gap-3">
+      <div className="dark w-full bottom-3 right-3 z-10 flex justify-center gap-3 my-5">
         <Dropdown>
           <DropdownTrigger>
             <Button variant="bordered">Add Preset</Button>
