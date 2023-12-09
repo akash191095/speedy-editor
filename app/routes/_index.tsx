@@ -2,8 +2,10 @@ import { Button, Card, CardBody, Divider } from "@nextui-org/react";
 import type { MetaFunction } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 
+import DemoDarkImg from "~/assets/demo-dark.png";
 import DemoImg from "~/assets/demo.png";
 import ImageEditor from "~/components/ImageEditor/ImageEditor";
+import { Theme, useTheme } from "~/utils/theme-provider";
 import { useOptionalUser } from "~/utils/utils";
 
 export const meta: MetaFunction = () => [{ title: "Speedy Editor" }];
@@ -11,6 +13,7 @@ export const meta: MetaFunction = () => [{ title: "Speedy Editor" }];
 export default function Index() {
   const user = useOptionalUser();
   const navigate = useNavigate();
+  const [theme] = useTheme();
   return (
     <>
       <main className="max-w-7xl mx-auto">
@@ -22,7 +25,7 @@ export default function Index() {
               The best photo editor is here!
             </h1>
             <img
-              src={DemoImg}
+              src={theme === Theme.DARK ? DemoDarkImg : DemoImg}
               alt="screenshot"
               className="h-96 mt-12 max-w-full"
             />
