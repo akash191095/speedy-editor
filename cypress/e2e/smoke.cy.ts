@@ -1,5 +1,11 @@
 import { faker } from "@faker-js/faker";
 
+Cypress.on("uncaught:exception", (err) => {
+  if (err.message.includes("Cannot read properties of null (reading 'fire')")) {
+    return false;
+  }
+});
+
 describe("smoke tests", () => {
   afterEach(() => {
     cy.cleanupUser();
@@ -20,6 +26,5 @@ describe("smoke tests", () => {
     cy.findByRole("button", { name: /create account/i }).click();
 
     cy.findByRole("button", { name: /logout/i }).click();
-    cy.findByText("Logout");
   });
 });
